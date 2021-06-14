@@ -1,0 +1,224 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Pour la navbar */
+.home-link{
+  color: whitesmoke;
+}
+
+.home-link:hover{
+  color: whitesmoke;
+  text-decoration: none;
+}
+
+.profile-img-card {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.card-container.card {
+  max-width: 550px !important;
+  padding: 40px 40px;
+}
+
+.card {
+  /* background-color: #f7f7f7; */
+  padding: 20px 25px 30px;
+  margin: 0 auto 25px;
+  margin-top: 80px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 10px;
+  border: 3px solid #0f584c;
+  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.inside-card-body{
+  border: 3px solid #0f584c;
+  background-color: #0f584c;
+  text-align: center;
+  color: whitesmoke;
+  border-radius: 5px;
+}
+
+/* Error-notice */
+.error-notice {
+  margin: 1rem0;
+  padding: 0.5rem;
+  border: 1px solid #e94848;
+  border-radius: 8px;
+  background-color: #f5bcbc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.error-notice button {
+  border: none;
+  border-radius: 50%;
+  background-color: #e94848;
+  padding-bottom: 1.3rem;
+  width: 20px;
+  height: 20px;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+/* Tableaux */
+
+.affichage-profil{
+  border: 3px solid #0f584c;
+  border-radius: 10px;
+}
+
+.affichage-profil thead tr{
+  background-color: #0f584c;
+  color: whitesmoke;
+}
+
+/* Montrer/cacher éléments */
+
+.montrer-cacher{
+  cursor: pointer;
+}
+
+/* Page accueil admin */
+
+.page-accueil-admin{
+  border: 3px solid #0f584c;
+  border-radius: 8px;
+  background-color: #0f584c;
+  color: whitesmoke;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.page-accueil-admin h5{
+  text-align: center;
+}
+
+.page-accueil-admin h4{
+  background-color: whitesmoke;
+  color: black;
+}
+
+.page-accueil-admin table tr{
+  background-color: whitesmoke;
+  color: black;
+}
+
+.page-accueil-admin table tr:hover{
+  background-color: #0f584c;
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+/* Page accueil profil membre */
+.page-accueil-profil{
+  border: 3px solid #0f584c;
+  background-color: #0f584c;
+  color: whitesmoke;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.page-accueil-profil h5{
+  text-align: center;
+}
+
+/* Historiques achats */
+.historique-achats{
+  border: 3px solid #0f584c;
+}
+
+/* Input à coté */
+.side-by-side{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
+
+/* Card pour dtéail produit */
+.card{
+  flex-direction: row;
+}
+
+/* Afficher plusieurs produits */
+.afficher-plusieurs-produits{
+  margin-top: 3%;
+  display: inline-flex;
+  border: solid 2px #0f584c;
+  border-radius: 1%;
+  width: 100%;
+  padding: 2%;
+}
+
+.afficher-plusieurs-produits:hover{
+  background-color: #0f584c;
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+.lien-useHistory{
+  text-decoration: underline;
+  color: #0f584c;
+  cursor: pointer;
+}
+
+.justify{
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.li-message-accueil{
+  list-style: circle;
+  margin-left: 3%;
+}
