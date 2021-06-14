@@ -1,6 +1,6 @@
 # sql-node-express-react
 
-# node-express-sql-react
+Les fichiers sont dans la branche master
 
 Mon Intention
 Ceci est l'ébauche un site commercial dont le seul but a été de tester l'utilisation de mySQL avec Node. J'ai aussi utilisé express pour le backend et react pour le frontend.
