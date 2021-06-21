@@ -4,29 +4,36 @@ import { Image } from 'cloudinary-react';
 
 import Requete from '../../middlewares/Requete';
 import GetToken from '../../middlewares/GetToken';
-import DropdownMenuValueChamps from '../../middlewares/DropDownMenuValueChamps';
 import ErrorNotice from '../../middlewares/ErrorNotice';
-import ModifierAdresseDepuisPageAchat from './ModifierAdresseEcranAchat';
-
 import UserContext from '../../context/UserContext';
+
+import MenuDeroulantModeLivraison from '../menuDeroulant/modeLivraison';
+import MenuDeroulantModePaiement from '../menuDeroulant/modePaiement';
+import ModifierAdresseDepuisPageAchat from './ModifierAdresseEcranAchat';
 
 export default function AchatImmediat(){
 
     const [achatValide, setAchatValide] = useState(false);
 
     const [produitData, setProduitData] = useState([]);
-    const [membreData, setMembreData] = useState([]);
     const [modeLivraisonData, setModeLivraisonData] = useState([]);
     const [modePaiementData, setModePaiementData] = useState([]);
+    const [error, setError] = useState();
 
     const [prix, setPrix] = useState();
     const [quantite, setQuantite] = useState();
-    const [paiement, setPaiement] = useState();
-    const [livraison, setLivraison] = useState();
-    const [error, setError] = useState();
 
+    // Seront utilisés par le component ModifierAdresseDepuisPageAchat. Ils sont déclarés ici pour récupérer les valeurs
     const [modifierAdresse, setModifierAdresse] = useState(false);
-    const [rafraichir, setRafraichir] = useState(0);
+    const [adresse, setAdresse] = useState();
+    const [codePostal, setCodePostal] = useState();
+    const [ville, setVille] = useState();
+
+    // Seront utilisés par le component MenuDeroulantModeLivraison. Ils sont déclarés ici pour récupérer les valeurs
+    const [livraison, setLivraison] = useState();
+
+    // Seront utilisés par le component MenuDeroulantModePaiement. Ils sont déclarés ici pour récupérer les valeurs
+    const [paiement, setPaiement] = useState();
     
     const {REACT_APP_CLOUDINARY_NAME} = process.env;
     const { produitId } = useParams();
@@ -45,21 +52,6 @@ export default function AchatImmediat(){
         }
         fetchProduitData();
 
-        // Si le membre n'est pas connecté, on ne fait pas cette requête pour éviter un chargement infini
-        if(token !==""){
-            async function fetchMembreData(){
-                const resultMembre = await Requete.get(
-                    "/membres/afficher-connecte",
-                    { headers: { "x-auth-token": token } },
-                );
-                setMembreData(resultMembre.data[0]);
-            };
-            fetchMembreData();
-        } else{
-            setMembreData("Non connecté");
-        }
-
-
         async function fetchModePaiementData(){
             const resultModePaiement = await Requete.get(
                 "/modePaiement/afficher"
@@ -76,20 +68,12 @@ export default function AchatImmediat(){
         };
         fetchModeLivraisonData();
 
-    }, [produitId, rafraichir, token]);
-
-    const champsModifierAdresse = () => {
-        if(modifierAdresse === false){setModifierAdresse(true)}
-        if(modifierAdresse === true){setModifierAdresse(false)}
-    }
+    }, [produitId, token]);
 
     const submit = async (e)=>{
         e.preventDefault();
 
         try {
-            let adresse = membreData.adresse;
-            let codePostal = membreData.code_postal;
-            let ville = membreData.ville
     
             const nouvelAchat = { produitId, prix, quantite, paiement, livraison, adresse, codePostal, ville };
     
@@ -106,9 +90,12 @@ export default function AchatImmediat(){
     }
 
     return(
-        <UserContext.Provider value={{rafraichir, setRafraichir, setModifierAdresse}}>
+        <UserContext.Provider
+            value={{modifierAdresse, setModifierAdresse, adresse, setAdresse, codePostal, setCodePostal, ville, setVille, token,
+                    setLivraison, setPaiement}}
+        >
             <div className="container" style={{marginTop: "80px"}}>
-                {(produitData.length === 0 || membreData.length === 0 || modePaiementData.length === 0 || modeLivraisonData.length === 0) ?
+                {(produitData.length === 0 || modePaiementData.length === 0 || modeLivraisonData.length === 0) ?
                     <h3>Chargement....</h3>
                 :
                 <div>
@@ -151,7 +138,7 @@ export default function AchatImmediat(){
                                 </div>
                             </div>
                             <form onSubmit={submit}>
-                                <div className="control" style={{display: "inline-flex", width: "90%", marginTop: "3%"}}>
+                                <div className="control" style={{display: "inline-flex", width: "100%", marginTop: "3%"}}>
                                     <div style={{display: "inline-flex", marginLeft: "3%"}}>
                                     <label>Quantité: </label>
                                         <input
@@ -165,66 +152,35 @@ export default function AchatImmediat(){
                                             onChange={(e)=>setQuantite(e.target.value)}
                                         />
                                     </div>
-                                    <div style={{display: "inline-flex", marginLeft: "3%", width: "21%"}}>
-                                        <label syle={{marginLeft: "3%"}}>Paiement: </label>
-                                        <DropdownMenuValueChamps
-                                            onChange={(e)=>{setPaiement(e.target.value)}}
-                                            donneesMap = {modePaiementData}
-                                            largeur = "100%"
-                                            margeGauche = "2%"
-                                        />
-                                    </div>
-                                    <div style={{display: "inline-flex", marginLeft: "3%", width: "25%"}}>
-                                        <label syle={{marginLeft: "3%"}}>Livraison: </label>
-                                        <DropdownMenuValueChamps
-                                            onChange={(e)=>{setLivraison(e.target.value)}}
-                                            donneesMap = {modeLivraisonData}
-                                            largeur = "120%"
-                                            margeGauche = "2%"
-                                        />
-                                    </div>
+                                <MenuDeroulantModePaiement />
+                                <MenuDeroulantModeLivraison />
                                 </div>
-                                <div style={{textAlign: "center", marginTop: "5%"}}>
-                                    {(modifierAdresse === false && !achatValide) &&
-                                        <>
-                                            <h5>Adresse de livraison:</h5>
-                                            <h5>{membreData.prenom} {membreData.nom}</h5>
-                                            <h5>{membreData.adresse} {membreData.code_postal} {membreData.ville}</h5>
-                                            <h6 onClick={champsModifierAdresse} style={{textDecoration: "underline", cursor: "pointer"}}>modifier</h6>
-                                        </>
-                                    }
-                                    {modifierAdresse === true &&
-                                        <>
-                                            <ModifierAdresseDepuisPageAchat
-                                                token = {token}
-                                                adresse = {membreData.adresse}
-                                                codePostal = {membreData.code_postal}
-                                                ville = {membreData.ville}
-                                            />
-                                            <h6 onClick={champsModifierAdresse} style={{textDecoration: "underline", cursor: "pointer"}}>Ne pas modifier</h6>
-                                        </>
-                                    }
-                                </div>
+                                <div>
+                                    <h4 style={{textAlign: 'right'}}>Total: {produitData.prix*1 * quantite} €</h4>
+                                </div>                                    
+                                <ModifierAdresseDepuisPageAchat
+                                    token = {token}
+                                />
                                 {error && (
                                     <ErrorNotice message={error} clearError={()=> setError(undefined)} />
                                 )} {/*S'il y a une erreur, affiche le message d'erreur, la faction anonyme supprime quand on clique */}
                                 {(produitData.quantite > 0 && !achatValide)  &&
-                                    <input type='submit' value="Payer" className="btn btn-primary float-right"/>
+                                    <input type='submit' value="Acheter" className="btn btn-primary float-right"/>
                                 }
                                 {achatValide &&
                                     <>
                                         <h4 style={{color: "green", textAlign: "center"}}>
                                             Votre achat a été validé !
                                             
-                                        </h4>
-                                        <h5
-                                            style={{textDecoration: "underline", color: "#0f584c", cursor: "pointer", textAlign: "center"}}
-                                            onClick={()=>history.goBack()}
-                                        >
-                                            Retour
-                                        </h5>       
+                                        </h4>     
                                     </>
                                 }
+                                <h5
+                                    style={{textDecoration: "underline", color: "#0f584c", cursor: "pointer", textAlign: "center", marginTop: "100px"}}
+                                    onClick={()=>history.goBack()}
+                                >
+                                    Retour
+                                </h5>  
                             </form>
                         </div>
                     }

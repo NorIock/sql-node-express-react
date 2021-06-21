@@ -102,7 +102,7 @@ export default function ModifierProduit(){
                     <label><strong>Modifier le nom du produit:</strong></label>
                     <input
                         type='text'
-                        placeholder="Indiquer le nom du produit"
+                        placeholder="Indiquer le nom du produit (80 charactères maximum)"
                         defaultValue={produitData.nom}
                         onChange={(e) => setNom(e.target.value)}
                         className='form-control'

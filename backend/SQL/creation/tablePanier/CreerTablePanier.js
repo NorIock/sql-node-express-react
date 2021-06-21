@@ -1,10 +1,10 @@
 const SqlConnexion = require('../../connexion');
 
-const creerPanier = async function(){
+const creerTablePanier = async function(){
 
     try {
         // On créé la table panier si elle n'existe pas
-        var sql_creerTablePanier = "CREATE TABLE IF NOT EXISTS panier (panier_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, quantite INT NOT NULL, membre_id INT, FOREIGN KEY (membre_id) REFERENCES membres(membre_id))";
+        var sql_creerTablePanier = "CREATE TABLE IF NOT EXISTS panier (panier_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, nombre_produit INT NOT NULL, membre_id INT, FOREIGN KEY (membre_id) REFERENCES membres(membre_id))";
         await SqlConnexion.query(sql_creerTablePanier);
 
         // On créé la jonction entre le panier et les produits (relation many to many)
@@ -16,4 +16,4 @@ const creerPanier = async function(){
     }
 }
 
-module.exports = creerPanier;
+module.exports = creerTablePanier;

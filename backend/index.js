@@ -43,3 +43,4 @@ app.use("/image", require("./routes/admin/testCloudinaryRouter"));
 app.use("/produit", require("./routes/admin/produitRouter"));
 app.use("/historiqueAchats", require("./routes/historiqueAchatRouter"));
 app.use("/message-accueil", require("./routes/admin/messageAccueilRouter"));
+app.use("/panier", require("./routes/panierRouter"));

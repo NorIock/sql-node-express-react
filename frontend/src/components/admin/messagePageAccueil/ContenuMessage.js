@@ -5,20 +5,26 @@ export default function ContenuMessageAccueil(){
     const [monIntention, setMonIntention] = useState(false);
     const [fonctions, setFonction] = useState(false);
     const [modeEmploi, setModeEmploi] = useState(false);
+    const [MAJ26062021, setMAJ26062021] = useState(false);
 
-    const montrerCacherMonIntention = ()=>{
+    const montrerCacherMonIntention = () => {
         if(monIntention){setMonIntention(false)};
         if(!monIntention){setMonIntention(true)};
     }
 
-    const montrerCacherFonctions = ()=>{
+    const montrerCacherFonctions = () => {
         if(fonctions){setFonction(false)};
         if(!fonctions){setFonction(true)};
     }
 
-    const montrerCacherModeEmploi = ()=>{
+    const montrerCacherModeEmploi = () => {
         if(modeEmploi){setModeEmploi(false)};
         if(!modeEmploi){setModeEmploi(true)};
+    }
+
+    const montrerCacherMAJ21062021 = () =>{
+        if(MAJ26062021){setMAJ26062021(false)};
+        if(!MAJ26062021){setMAJ26062021(true)};
     }
 
     return(
@@ -178,6 +184,58 @@ export default function ContenuMessageAccueil(){
                 pouvez les supprimer mais pas tous, il en restera au moins un pour chaque catégorie.
             </h5>
             <h6 className="lien-useHistory" onClick={montrerCacherModeEmploi}>Cacher</h6>
+            <br />
+            </>
+            }
+            <h4 className="lien-useHistory" onClick={montrerCacherMAJ21062021}>MAJ du 21/06/2021</h4>
+            {MAJ26062021 &&
+            <>
+            <h5 className="justify">
+                Optimisation: modification du component de l'achat immédiat afin qu'il puisse être réutilisé pour le panier.
+            </h5>
+            <h5 className="justify">
+                Ajout du panier:
+                <li className="li-message-accueil">
+                    Le bouton panier dans le détail du produit est désormais fonctionnel
+                </li>
+                <li className="li-message-accueil">
+                    Si l'utilisateur n'est pas connecté quand il clique sur le panier, il sera automatiquement redirigé vers la
+                    page de connexion. Une fois connecté, il sera redirigé sur le détail du produit qu'il souhaitait ajouter à 
+                    son panier
+                </li>
+                <li className="li-message-accueil">
+                    Quand il ajoute un article au panier, un message en vert lui indique que l'ajout est fait avec un lien pour le
+                    diriger vers le détail de son panier. Il peut soit le suivre, soit continuer à naviguer sur le site comme bon
+                    lui semble.
+                </li>
+                <li className="li-message-accueil">
+                    Il pourra aussi accéder à son panier via le lien vers son profil dans la navbar. A partir de son panier, il 
+                    pourra augmenter  ou diminuer le nombre d'articles qu'il souhaite prendre ou supprimer un article en mettant
+                    une quantité de zéro. Il peut modifier la quantité de tous les produits en une seule fois et le montant total
+                    sera mis à jour à chaque modification validée. Il ne pourra pas valider son panier si il est en cours de 
+                    modification.
+                </li>
+                <li className="li-message-accueil">
+                    A partir du panier, il pourra alors le valider. Une vérification sera faite dans le backend à ce moment pour
+                    vérifier, si depuis qu'il a mit ses articles dans le panier, il y toujours en stock la quantité demandée 
+                    et si le produit est toujours proposé à la vente. S'il y a des erreurs, tous les problèmes apparaiteront
+                    sur un seul message avec une explication adaptée, quelque soit le nombre d'erreur. Il sera alors invité
+                    à réajuster la quantité ou supprimer le produit s'il n'est plus en vente.
+                </li>
+                <li className="li-message-accueil">
+                    Si le membre peut validé l'étape ci-dessus, il sera dirigé vers une nouvelle page pour procéder au paiement. Il
+                    pourra alors choisir le mode de paiement, le type de livraison et, comme pour l'achat immédiat, modifier son 
+                    adresse de livraison sur la même page s'il a besoin de le faire.
+                    Quand il validera son achat, comme on ne peut pas savoir le temps qu'il a passé sur cet écran et l'évolution
+                    que le stock a pu avoir, la vérification des stocks sera relancée avant de valider l'achat.
+                </li>
+                <li className="li-message-accueil">
+                    Tous les achats du panier apparaiteront alors sur son historique d'achat. Il n'y a pas de présentation
+                    particulière entre un achat fait en direct ou via le panier mais tous ceux effectués via le panier auront
+                    exactement la même date d'achat.
+                </li>
+            </h5>
+            <h6 className="lien-useHistory" onClick={montrerCacherMAJ21062021}>Cacher</h6>
             <br />
             </>
             }

@@ -153,8 +153,6 @@ router.post("/connexion", async function(req, res){
 // Cette route permet d'afficher les données du membre connecté
 router.get("/afficher-connecte", auth, async function(req, res){
     try{
-        console.log("Dans la route pour afficher le membre connecté");
-        console.log("id: ", req.membre);
 
         var rechercheMembre = "SELECT * FROM membres WHERE membre_id = ?";
         var values = req.membre;

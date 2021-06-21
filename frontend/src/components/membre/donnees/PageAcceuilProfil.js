@@ -4,6 +4,7 @@ import AfficherProfilConnecte from './AfficherProfilConnecte';
 import PanierMembre from './Panier';
 import ListeEnviesMembre from './ListeEnvies';
 import HistoriqueAchatsMembre from './HistoriqueAchat';
+import NombreArticlesPanier from '../../panier/NombreArticles';
 
 export default function PageAccueilProfil(){
 
@@ -38,7 +39,7 @@ export default function PageAccueilProfil(){
                 {montrerCacherProfil &&
                     <AfficherProfilConnecte />
                 }
-            <h5 className="montrer-cacher page-accueil-profil" onClick={onClickPanier}>Panier</h5>
+            <h5 className="montrer-cacher page-accueil-profil" onClick={onClickPanier}>Panier <NombreArticlesPanier /></h5>
                 {montrerCacherPanier &&
                     <PanierMembre />
                 }

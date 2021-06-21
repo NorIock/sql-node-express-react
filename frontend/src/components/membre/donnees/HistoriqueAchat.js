@@ -39,7 +39,7 @@ export default function HistoriqueAchatsMembre(props){
                     <h3 style={{textAlign: "center"}}>Chargement....</h3>
                 </div>
             :
-                <div className="historique-achats">
+                <div>
                     {data === "Rien" &&
                         <h4 style={{textAlign: "center"}}>Aucun achat effectué</h4>
                     }
@@ -101,13 +101,24 @@ export default function HistoriqueAchatsMembre(props){
                                 :
                                 (i > 0 && data[i].historique_id !== data[i-1].historique_id) ?
                                     <div  style={{width: "100%", display: "inline-flex", marginTop: "3%", borderBottom: "solid 1px #0f584c", borderTop: "solid 1px #0f584c", padding: "1%"}}>
-                                        <div>
-                                            <Image
-                                            cloudName={REACT_APP_CLOUDINARY_NAME}
-                                            publicId={achat.public_id}
-                                            width='200'
-                                            crop="scale"
-                                            />
+                                        <div style={{width: "17%", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                                            {achat.hauteur >= achat.largeur ?
+                                                <Image
+                                                    cloudName={REACT_APP_CLOUDINARY_NAME}
+                                                    publicId={achat.public_id}
+                                                    height='200'
+                                                    crop="scale"
+                                                />
+                                            :
+                                            achat.hauteur < achat.largeur ?
+                                                <Image
+                                                    cloudName={REACT_APP_CLOUDINARY_NAME}
+                                                    publicId={achat.public_id}
+                                                    width='200'
+                                                    crop="scale"
+                                                />
+                                            : null
+                                            }
                                         </div>
                                         <div style={{marginLeft: "2%"}}>
                                             <h5 style={{fontWeight: "bold"}}>{achat.nom}</h5>

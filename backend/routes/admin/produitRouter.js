@@ -13,6 +13,7 @@ router.post("/ajouter", adminAuth, async function(req, res){
 
     try {
         if(!req.body.nom){return res.status(400).send({msg: "Veuillez indiquer le nom du produit"})};
+        if(req.body.nom.length > 80){return res.status(400).send({msg: "80 charactères maximums pour le nom du produit. Vous en avez: " + req.body.nom.length})};
         if(req.body.photo.length === 0){return res.status(400).send({msg: "Veuillez ajouter au moins une photo du produit: " + req.body.nom })};
         if(!req.body.prix){return res.status(400).send({msg: "Veuillez indiquer le prix du produit"})};
         if(!req.body.quantite){return res.status(400).send({msg: "Veuillez indiquer la quantité disponible du produit"})};
@@ -135,6 +136,7 @@ router.put("/modifier/:id", async function(req, res){
         var sqlProduitAvantModification = "SELECT * FROM produit WHERE produit_id = ?"
         const produitAvantModification = await SqlConnexion.query(sqlProduitAvantModification, [req.params.id]);
 
+        if(req.body.nom && req.body.nom.length > 80){return res.status(400).send({msg: "80 charactères maximums pour le nom du produit. Vous en avez: " + req.body.nom.length})};
         if(!req.body.nom){req.body.nom = produitAvantModification[0].nom}
         if(!req.body.prix){req.body.prix = produitAvantModification[0].prix}
         if(!req.body.quantite){req.body.quantite = produitAvantModification[0].quantite}

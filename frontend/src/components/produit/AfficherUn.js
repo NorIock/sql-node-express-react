@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom'
 
 import ImageProduit from '../admin/produits/imageProduit';
+import AjouterPanier from '../panier/Ajouter';
 import Requete from '../../middlewares/Requete';
 
 export default function AfficherUnPourUtilisateur(){
@@ -45,7 +46,7 @@ export default function AfficherUnPourUtilisateur(){
                 {data.quantite === 0 &&
                     <h6 style={{color: "red"}}>Produit temporairement indisponible</h6>
                 }
-                <div className="form-group" style={{display: "flex"}}>
+                <div className="form-group" style={{display: "flex", height: "50px"}}>
                     {(data.quantite > 0 && data.en_vente) ?
                         <>
                             <input
@@ -55,18 +56,15 @@ export default function AfficherUnPourUtilisateur(){
                             onClick={()=>history.push("/achat-direct/" + data.produit_id)}
                             style={{marginRight: "2%"}}
                             />
-                            <input
-                            type="submit"
-                            value="Ajouter au panier"
-                            className="btn btn-info"
-                            onClick={()=>history.push("/panier")}
-                            style={{marginRight: "2%"}}
+                            <AjouterPanier 
+                                produit_id = {data.produit_id}
                             />
                             <input
                             type="submit"
                             value="Ajouter à la liste d'envie"
                             className="btn btn-secondary"
                             onClick={()=>history.push("/liste-envie")}
+                            style={{marginLefet: "2%"}}
                         />
                         </>
                     :
@@ -90,7 +88,7 @@ export default function AfficherUnPourUtilisateur(){
                     
                     
                 </div>
-                <h6 style={{whiteSpace: "pre-wrap", textAlign: "justify", textJustify: "inter-word"}}>{data.description}</h6>
+                <h6 style={{whiteSpace: "pre-wrap", textAlign: "justify", textJustify: "inter-word", marginTop: "12%"}}>{data.description}</h6>
             </div>
         </div>
         }

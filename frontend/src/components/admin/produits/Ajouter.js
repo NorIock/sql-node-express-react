@@ -132,7 +132,7 @@ export default function AjouterProduit(){
                         <label>Nom du produit:</label>
                         <input
                             type='text'
-                            placeholder="Indiquer le nom du produit"
+                            placeholder="Indiquer le nom du produit (80 charactères maximum)"
                             onChange={(e) => setNom(e.target.value)}
                             className='form-control'
                         />

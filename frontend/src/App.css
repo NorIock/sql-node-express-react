@@ -120,6 +120,16 @@
   color: whitesmoke;
 }
 
+.affichage-panier{
+  border: 3px solid #0f584c;
+  border-radius: 10px;
+}
+
+.affichage-panier thead tr{
+  background-color: #0f584c;
+  color: whitesmoke;
+}
+
 /* Montrer/cacher éléments */
 
 .montrer-cacher{

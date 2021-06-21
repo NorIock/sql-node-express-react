@@ -56,6 +56,10 @@ import AchatImmediat from './components/achat/AchatDirect';
 // Import pour l'historique d'achat
 import DetailHistoriqueAchats from './components/historiqueAchats/Detail';
 
+// Imports pour le panier
+import ValiderModifierPanier from './components/panier/ValiderModifierPanier';
+import FinaliserPaiementPanier from './components/panier/PayerPanier';
+
 export default function App() {
 
   const [userData, setUserData] = useState({
@@ -134,6 +138,9 @@ export default function App() {
           <Route path="/achat-direct/:produitId" component={AchatImmediat} />
 
           <Route path="/historique-achats" component={DetailHistoriqueAchats} />
+
+          <Route path="/panier/valider-modifier" component={ValiderModifierPanier} />
+          <Route path="/panier/finaliser-paiement" component={FinaliserPaiementPanier} />
 
 
         </Switch>

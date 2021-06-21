@@ -29,7 +29,6 @@ export default function AfficherMessageLancementSiteAccueil(){
     }
 
     return(
-        console.log("afficherMessageLancement: ", afficherMessageLancement),
         <div className="container">
             {afficherMessageLancement.length === 0 ?
                 <h3 style={{textAlign: "center"}}>Chargement...</h3> 
